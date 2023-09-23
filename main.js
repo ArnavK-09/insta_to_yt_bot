@@ -23,7 +23,8 @@ const main = () => {
 // cron shop
 console.log("[PROGRAM] Main Script Started First Time!");
 main();
+/*
 cron.schedule("* * 6 * *", () => {
   console.log("[PROGRAM] Cron Job Schedule Called!");
   main();
-});
+});*/
