@@ -1,24 +1,29 @@
 // imports
-const {
-  downloadFileFromUrl,
-  scrapeInstagramPost,
-} = require("./createVideo.js");
+const { scrapeInstagramPost } = require("./createVideo.js");
 const usernames = require("./usernames.js");
 const cron = require("node-cron");
-const uploadVideoToYoutube = require("./uploadVideoToYoutube.js");
-// utils
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const { uploadVideo } = require("./uploadVideoToYoutube.js");
 
-// Get username
-let username = usernames[Math.floor(Math.random() * usernames.length)];
-
-// cron shop
-cron.schedule("* * 6 * *", () => {
+// Main
+const main = () => {
+  let username = usernames[Math.floor(Math.random() * usernames.length)];
+  console.log("[PROGRAM] Main Thread Started!");
   scrapeInstagramPost(username)
-    .then(async (postURLs) => {
-      await uploadVideoToYoutube(username);
+    .then(async () => {
+      console.log("[DEBUG] Insta Posts Scraped!");
+      uploadVideo(username).catch((error) => {
+        console.error("[ERROR YT]\n", error);
+      });
     })
     .catch((error) => {
-      console.error("Error:", error);
+      console.error("[ERROR]\n", error);
     });
+};
+
+// cron shop
+console.log("[PROGRAM] Main Script Started First Time!");
+main();
+cron.schedule("* * 6 * *", () => {
+  console.log("[PROGRAM] Cron Job Schedule Called!");
+  main();
 });

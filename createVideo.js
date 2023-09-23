@@ -2,6 +2,7 @@
 const axios = require("axios");
 const fs = require("fs");
 const puppeteer = require("puppeteer");
+const chromium = require("chrome-aws-lambda");
 
 /**
  * Downloads media file from Http URL in path mentioned
@@ -9,6 +10,7 @@ const puppeteer = require("puppeteer");
  * @param destination
  */
 const downloadFileFromUrl = async (media_url, destination = "./video.mp4") => {
+  console.log("[DEBUG] Download File From URL Function Called | ", media_url);
   const writer = fs.createWriteStream(destination);
   const response = await axios({
     url: media_url,
@@ -28,15 +30,25 @@ const downloadFileFromUrl = async (media_url, destination = "./video.mp4") => {
  */
 const scrapeInstagramPost = async (username) => {
   // new browser
-  const browser = await puppeteer.launch({
+  console.log(`[INFO] Scrape Instagram Post Started For @${username}`);
+  const browser = await chromium.puppeteer.launch({
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
     headless: "new",
+    ignoreHTTPSErrors: true,
   });
 
   // get user vid
   const page = await browser.newPage();
 
   // Go to the user's profile page
-  await page.goto(`https://greatfon.com/v/${username}`);
+  console.log("[INFO] On the Insta User Page!");
+  await page.goto(`https://greatfon.com/v/${username}`, {
+    waitUntil: "load",
+    timeout: 0,
+  });
+  await page.screenshot({ path: "fullpage.png", fullPage: true });
   // Wait for the user profile to load with an extended timeout
   await page.waitForSelector("a").catch((e) => {
     console.log(e);
@@ -51,8 +63,10 @@ const scrapeInstagramPost = async (username) => {
   const post = postURLs[Math.floor(Math.random() * postURLs.length)];
 
   // Get video
+  console.log("[INFO] On the Insta Video Page!");
   const page2 = await browser.newPage();
   await page2.goto(`https://greatfon.com${post}`);
+  await page2.screenshot({ path: "ful2lpage.png", fullPage: true });
   await page2.waitForSelector("video").catch((e) => {
     console.log(e);
   });
