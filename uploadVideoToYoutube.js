@@ -92,9 +92,7 @@ async function uploadVideoToYoutube(
         body: fs.createReadStream(fileName),
       },
     }
-  ).catch((error) => {
-        console.error("[ERROR YT]\n", error);
-      });;
+  )
   console.log("\n[INFO] Upload to Youtube Done!\n")
   return res.data;
 }
