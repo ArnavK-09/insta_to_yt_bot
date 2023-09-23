@@ -32,7 +32,7 @@ const scrapeInstagramPost = async (username) => {
   // new browser
   console.log(`[INFO] Scrape Instagram Post Started For @${username}`);
   const browser = await chromium.puppeteer.launch({
-    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security", '--no-sandbox', '--disable-setuid-sandbox'],
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath,
     headless: "new",
