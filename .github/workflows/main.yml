@@ -1,0 +1,24 @@
+name: RUN
+
+on:
+  push:
+    branches:
+      - main  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        
+    - name: Install Node.js dependencies
+      run: npm install  
+      
+    - name: Run main.js
+      run: node main.js
