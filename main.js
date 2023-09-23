@@ -11,9 +11,7 @@ const main = () => {
   scrapeInstagramPost(username)
     .then(async () => {
       console.log("[DEBUG] Insta Posts Scraped!");
-      uploadVideo(username).catch((error) => {
-        console.error("[ERROR YT]\n", error);
-      });
+      uploadVideo(username)
     })
     .catch((error) => {
       console.error("[ERROR]\n", error);
