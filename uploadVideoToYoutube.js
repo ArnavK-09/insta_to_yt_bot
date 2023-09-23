@@ -11,40 +11,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// imports 
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-const {google} = require('googleapis');
-const {authenticate} = require('@google-cloud/local-auth');
+// imports
+const fs = require("fs");
+const path = require("path");
+const readline = require("readline");
+const { google } = require("googleapis");
+const { authenticate } = require("@google-cloud/local-auth");
 
 // initialize the Youtube API library
-const youtube = google.youtube('v3');
+const youtube = google.youtube("v3");
 
 // very basic example of uploading a video to youtube
-async function uploadVideoToYoutube(fileName) {
+async function uploadVideoToYoutube(
+  username = "video",
+  fileName = "video.mp4",
+) {
   // Obtain user credentials to use for the request
   const auth = await authenticate({
-    keyfilePath: path.join(__dirname, './oauth.keys.json'),
+    keyfilePath: path.join(__dirname, "./oauth.keys.json"),
     scopes: [
-      'https://www.googleapis.com/auth/youtube.upload',
-      'https://www.googleapis.com/auth/youtube',
+      "https://www.googleapis.com/auth/youtube.upload",
+      "https://www.googleapis.com/auth/youtube",
     ],
   });
-  google.options({auth});
+  google.options({ auth });
 
   const fileSize = fs.statSync(fileName).size;
   const res = await youtube.videos.insert(
     {
-      part: 'id,snippet,status',
-      notifySubscribers: false,
+      part: "id,snippet,status",
+      notifySubscribers: true,
       requestBody: {
         snippet: {
-          title: 'Node.js YouTube Upload Test',
-          description: 'Testing YouTube upload via Google APIs Node.js Client',
+          title: `@${username}`,
+          description: "Testing YouTube upload via Google APIs Node.js Client",
         },
         status: {
-          privacyStatus: 'private',
+          privacyStatus: "private",
         },
       },
       media: {
@@ -52,16 +55,17 @@ async function uploadVideoToYoutube(fileName) {
       },
     },
     {
-      onUploadProgress: evt => {
+      onUploadProgress: (evt) => {
         const progress = (evt.bytesRead / fileSize) * 100;
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0, null);
         process.stdout.write(`${Math.round(progress)}% complete`);
       },
-    }
+    },
   );
   console.log(res.data);
   return res.data;
-}  
+}
 
+// exporting
 module.exports = uploadVideoToYoutube;
