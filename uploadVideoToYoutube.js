@@ -73,7 +73,6 @@ async function uploadVideoToYoutube(
   // Obtain user credentials to use for the request
   console.log("[INFO] Upload to Youtube Initiated!");
 
-  const fileSize = fs.statSync(fileName).size;
   console.log("[DEBUG] Upload to Youtube Request Sent!");
   const res = await youtube.videos.insert(
     {
@@ -92,19 +91,11 @@ async function uploadVideoToYoutube(
       media: {
         body: fs.createReadStream(fileName),
       },
-    },
-    {
-      onUploadProgress: (evt) => {
-        const progress = (evt.bytesRead / fileSize) * 100;
-        readline.clearLine(process.stdout, 0);
-        readline.cursorTo(process.stdout, 0, null);
-        process.stdout.write(
-          `[YOUTUBE] Video Uploading - ${Math.round(progress)}% complete`,
-        );
-      },
-    },
-  );
-  console.log("\n[INFO] Upload to Youtube Done!\n");
+    }
+  ).catch((error) => {
+        console.error("[ERROR YT]\n", error);
+      });;
+  console.log("\n[INFO] Upload to Youtube Done!\n")
   return res.data;
 }
 
