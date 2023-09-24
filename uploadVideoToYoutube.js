@@ -82,7 +82,7 @@ async function uploadVideoToYoutube(
       requestBody: {
         snippet: {
           title: `@${username} v${Math.floor(Math.random() * 10000) + 1}`,
-          description: `#InstagramMemes #FunnyMemes #Memes2023 #ViralMemes #HilariousVideos #TrendingMemes #LaughOutLoud #ComedyVideos #SocialMediaHumor #MemesCompilation #HumorGram #MemeAddict #${username}`,
+          description: `#InstagramMemes #FunnyMemes #Memes2023 #ViralMemes #HilariousVideos #TrendingMemes #LaughOutLoud #ComedyVideos #SocialMediaHumor #MemesCompilation #HumorGram #MemeAddict #${username} #LOL`,
         },
         status: {
           privacyStatus: "public",
