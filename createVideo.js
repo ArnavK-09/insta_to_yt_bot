@@ -65,7 +65,7 @@ const scrapeInstagramPost = async (username) => {
   const post = postURLs[Math.floor(Math.random() * postURLs.length)];
 
   // Get video
-  console.log("[INFO] On the Insta Video Page!");
+  console.log("[INFO] On the Insta Video Page!", postURLs);
   console.log(`[DEBUG] Post:- ${post}\nPost Lists:- ${postURLs}`)
   const page2 = await browser.newPage();
   await page2.goto(`https://greatfon.com${post}`);
