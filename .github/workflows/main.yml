@@ -1,14 +1,13 @@
-name: RUN
-
+name: Scrape Insta → Upload YouTube 
 
 on:
   schedule:
-    - cron: '0 */2 * * *'  # Runs every 2 hours
+    - cron: '0 */2 * * *'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 5
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -17,9 +16,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16'
-        
+
     - name: Install Node.js dependencies
-      run: npm install  
-      
-    - name: Run main.js
+      run: npm install
+
+    - name: Run Main Function
       run: node main.js || true
