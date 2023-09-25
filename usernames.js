@@ -18,6 +18,7 @@ const usernames = [
   "hypedmotors",
   "itsdanielmac",
   "scumbagdadofficial",
+  "__djsugue",
 ];
 // export
 module.exports = usernames;
