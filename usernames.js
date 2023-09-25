@@ -14,7 +14,10 @@ const usernames = [
   "speed_mcqueen_official",
   "internett_moneyy",
   "realsircruse",
-  "eren_lenox"
+  "eren_lenox",
+  "hypedmotors",
+  "itsdanielmac",
+  "scumbagdadofficial",
 ];
 // export
 module.exports = usernames;
