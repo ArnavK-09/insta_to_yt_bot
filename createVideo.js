@@ -66,9 +66,9 @@ const scrapeInstagramPost = async (username) => {
 
   // Get video
   console.log("[INFO] On the Insta Video Page!");
+  console.log(`[DEBUG] Post:- ${post}\nPost Lists:- ${postURLs}`)
   const page2 = await browser.newPage();
   await page2.goto(`https://greatfon.com${post}`);
-  await page2.screenshot({ path: "ful2lpage.png", fullPage: true });
   await page2.waitForSelector("video").catch((e) => {
     console.log(e);
     process.exit(1)
