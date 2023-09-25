@@ -81,7 +81,10 @@ const scrapeInstagramPost = async (username) => {
     ),
   );
   // download url
-  await downloadFileFromUrl(vids[0]);
+  await downloadFileFromUrl(vids[0]).catch((e) => {
+   console.log("[ERROR]", e)
+   process.exit(1)
+});
 
   // Close the browser
   await browser.close();
