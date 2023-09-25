@@ -3,6 +3,7 @@ const axios = require("axios");
 const fs = require("fs");
 const puppeteer = require("puppeteer");
 const chromium = require("chrome-aws-lambda");
+const process = require('process');
 
 /**
  * Downloads media file from Http URL in path mentioned
@@ -52,6 +53,7 @@ const scrapeInstagramPost = async (username) => {
   // Wait for the user profile to load with an extended timeout
   await page.waitForSelector("a").catch((e) => {
     console.log(e);
+    process.exit(1)
   });
 
   // Extract the post URLs
@@ -69,6 +71,7 @@ const scrapeInstagramPost = async (username) => {
   await page2.screenshot({ path: "ful2lpage.png", fullPage: true });
   await page2.waitForSelector("video").catch((e) => {
     console.log(e);
+    process.exit(1)
   });
 
   // Extract the post URLs
