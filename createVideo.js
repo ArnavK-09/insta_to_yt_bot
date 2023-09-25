@@ -65,7 +65,7 @@ const scrapeInstagramPost = async (username) => {
   const post = postURLs[Math.floor(Math.random() * postURLs.length)];
 
   // Get video
-  console.log("[INFO] On the Insta Video Page!", postURLs);
+  console.log("[INFO] On the Insta Video Page!");
   console.log(`[DEBUG] Post:- ${post}\nPost Lists:- ${postURLs}`)
   const page2 = await browser.newPage();
   await page2.goto(`https://greatfon.com${post}`);
@@ -83,7 +83,7 @@ const scrapeInstagramPost = async (username) => {
   // download url
   await downloadFileFromUrl(vids[0]).catch((e) => {
    console.log("[ERROR]", e)
-   process.exit(1)
+   process.exit(0)
   });
 
   // Close the browser
