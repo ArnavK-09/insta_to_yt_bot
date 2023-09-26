@@ -58,12 +58,12 @@
    const postURLs = await page.evaluate(() => 
      Array.from(document.querySelectorAll("a")) 
        .map((d) => d.getAttribute("href")) 
-       .filter((z) => z.includes("/media/")), 
+       .filter((z) => z.includes("media")), 
    ); 
    const post = postURLs[Math.floor(Math.random() * postURLs.length)]; 
   
    // Get video 
-   console.log("[INFO] On the Insta Video Page!"); 
+   console.log("[INFO] On the Insta Video Page!", postURLs); 
    console.log(`[DEBUG] Post:- ${post}\nPost Lists:- ${postURLs}`) 
    const page2 = await browser.newPage(); 
    await page2.goto(`${post}`); 
