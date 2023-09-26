@@ -49,14 +49,14 @@
      timeout: 0, 
    }); 
    // Wait for the user profile to load with an extended timeout 
-   await page.waitForSelector(".box-photo > a").catch((e) => { 
+   await page.waitForSelector(".box-photo a").catch((e) => { 
      console.log(e); 
      process.exit(1) 
    }); 
   
    // Extract the post URLs 
    const postURLs = await page.evaluate(() => 
-     Array.from(document.querySelectorAll(".box-photo > a")) 
+     Array.from(document.querySelectorAll(".box-photo a")) 
        .map((d) => d.getAttribute("href")) 
        .filter((z) => z.includes("media")), 
    ); 
