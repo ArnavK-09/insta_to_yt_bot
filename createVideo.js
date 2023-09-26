@@ -49,7 +49,7 @@
      timeout: 0, 
    }); 
    // Wait for the user profile to load with an extended timeout 
-   await page.waitForSelector(".box-photo a").catch((e) => { 
+   await page.waitForSelector(".box-photo").catch((e) => { 
      console.log(e); 
      process.exit(1) 
    }); 
