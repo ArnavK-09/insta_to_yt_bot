@@ -63,6 +63,10 @@ const scrapeInstagramPost = async (username) => {
       .filter((z) => z.startsWith("/c/")),
   );
   const post = postURLs[Math.floor(Math.random() * postURLs.length)];
+  if(!post) {
+    console.log("[ERROR] Post Not Found, ", postURLs)
+     process.exit(0)
+  }
 
   // Get video
   console.log("[INFO] On the Insta Video Page!");
