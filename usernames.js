@@ -19,6 +19,8 @@ const usernames = [
   "itsdanielmac",
   "scumbagdadofficial",
   "__djsugue",
+  "whereisnigga",
+  "petergriffinreelhub"
 ];
 // export
 module.exports = usernames;
