@@ -20,7 +20,10 @@ const usernames = [
   "scumbagdadofficial",
   "__djsugue",
   "whereisnigga",
-  "petergriffinreelhub"
+  "petergriffinreelhub",
+  "zaynsofuoglu",
+  "ipostcrashes",
+  "underraterdmeme4z",
 ];
 // export
 module.exports = usernames;
