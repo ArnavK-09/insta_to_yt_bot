@@ -1,6 +1,6 @@
 name: Scrape Insta → Upload YouTube 
 
-on:
+onn:
   schedule:
     - cron: '0 */2 * * *'
 
